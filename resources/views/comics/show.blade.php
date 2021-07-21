@@ -1,7 +1,18 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>{{ $comic->series }} {{ $comic->title }}</h1>
+    @if (session('msg'))
+    <div class="alert alert-success mb-4">
+        {{ session('msg') }}
+    </div>
+    @endif
+    <div class="d-flex justify-content-between">
+        <h1>{{ $comic->series }} {{ $comic->title }}</h1>
+        <div>
+            <a class="btn btn-warning" href="{{ route("comics.edit", $comic->id) }}">Modifica</a>
+            <a class="btn btn-danger" href="/">Elimina</a>
+        </div>
+    </div>
 
     <div class="row my-5">
         <div class="col-2">

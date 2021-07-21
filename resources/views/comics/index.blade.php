@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Comics List</h1> 
-    
+
     <div class="mt-4">
         <a class="btn btn-primary" href="{{ route("comics.create") }}">Crea un Fumetto</a>
     </div>
@@ -25,9 +25,11 @@
                     <td>{{ $item->series }}</td>
                     <td>{{ $item->price }} &euro;</td>
                     <td>
-                        <a href="{{ route("comics.show", $item->id) }}" class="btn btn-primary">SHOW</a>
+                        <a href="{{ route("comics.show", $item->id) }}" class="btn btn-success">SHOW</a>
                     </td>
-                    <td>EDIT</td>
+                    <td>
+                        <a href="{{ route("comics.edit", $item->id) }}" class="btn btn-primary">EDIT</a>
+                    </td>
                     <td>DELETE</td>
                 </tr> 
             @endforeach
