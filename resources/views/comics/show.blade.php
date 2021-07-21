@@ -8,9 +8,18 @@
     @endif
     <div class="d-flex justify-content-between">
         <h1>{{ $comic->series }} {{ $comic->title }}</h1>
-        <div>
-            <a class="btn btn-warning" href="{{ route("comics.edit", $comic->id) }}">Modifica</a>
-            <a class="btn btn-danger" href="/">Elimina</a>
+        <div class="d-flex justify-content-between">
+            <form class="me-1">
+                <a class="btn btn-warning" href="{{ route("comics.edit", $comic->id) }}">Modifica</a>
+            </form>
+            <form 
+                action="{{ route('comics.destroy', $comic->id) }}" 
+                method="POST"
+                onsubmit = "return confirm('Confermi di voler eliminare definitivamente {{ $comic->series }} {{ $comic->title }} ?')">
+                @csrf
+                @method('DELETE')
+                <input type="submit" class="btn btn-danger" value="Elimina">
+            </form>
         </div>
     </div>
 

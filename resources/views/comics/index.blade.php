@@ -1,11 +1,18 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Comics List</h1> 
-
-    <div class="mt-4">
-        <a class="btn btn-primary" href="{{ route("comics.create") }}">Crea un Fumetto</a>
+    <div class="d-flex justify-content-between">
+        <h1>Comics List</h1> 
+        <form>
+            <a class="btn btn-primary" href="{{ route("comics.create") }}">Crea un Fumetto</a>
+        </form>
     </div>
+
+    @if (session('deleted'))
+        <div class="alert alert-success">
+            {{ session('deleted') }}
+        </div>
+    @endif
 
     <table class="mt-4 table table-striped">
         <thead>
@@ -30,7 +37,16 @@
                     <td>
                         <a href="{{ route("comics.edit", $item->id) }}" class="btn btn-primary">EDIT</a>
                     </td>
-                    <td>DELETE</td>
+                    <td>
+                        <form 
+                            action="{{ route('comics.destroy', $item->id) }}" 
+                            method="POST"
+                            onsubmit = "return confirm('Confermi di voler eliminare definitivamente {{ $item->series }} {{ $item->title }} ?')">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="btn btn-danger" value="DELETE">
+                        </form>
+                    </td>
                 </tr> 
             @endforeach
         </tbody>
