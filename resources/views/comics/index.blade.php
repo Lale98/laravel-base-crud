@@ -1,7 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Comics List</h1>    
+    <h1>Comics List</h1> 
+    
+    <div class="mt-4">
+        <a class="btn btn-primary" href="{{ route("comics.create") }}">Crea un Fumetto</a>
+    </div>
 
     <table class="mt-4 table table-striped">
         <thead>
